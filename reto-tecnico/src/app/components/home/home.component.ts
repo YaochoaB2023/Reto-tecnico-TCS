@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 //servicio de datos
 import { DataService } from 'src/app/services/data/data.service';
@@ -16,6 +16,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   dtTrigger: Subject<any> = new Subject<any>();
   products: any[] = [];
   consultaRealizada = false;
+
+  @ViewChild('dataTable', { static: false }) dataTable!: ElementRef<HTMLTableElement>;
+
 
   constructor(private dataService: DataService) {}
 
@@ -56,4 +59,28 @@ export class HomeComponent implements OnInit, OnDestroy {
       imageAlt: 'Imagen del producto',
     });
   }
+  guardarPdf(): void {
+    const printWindow = window.open('', '_blank');
+
+    if (printWindow) {
+      printWindow.document.write('<html><head><title>Tabla de Productos</title></head><body>');
+      printWindow.document.write('<h1>Tabla de Productos</h1>');
+      printWindow.document.write(this.dataTable.nativeElement.outerHTML);
+      printWindow.document.write('</body></html>');
+      printWindow.document.close();
+      printWindow.print();
+    } else {
+      alert('Por favor, habilite las ventanas emergentes para imprimir.');
+    }
+  }
+
+  calcularSumaTotal(): void {
+    const sumaTotal = this.dataService.calcularSumaTotal(this.products);
+    Swal.fire({
+      title: 'Suma Total de Precios',
+      text: `La suma total de los precios es: ${sumaTotal.toFixed(2)}`,
+      icon: 'info',
+    });
+  }
+
 }
