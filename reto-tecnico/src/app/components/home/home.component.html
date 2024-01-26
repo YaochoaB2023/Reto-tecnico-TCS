@@ -1,0 +1,33 @@
+
+
+<div *ngIf="products">
+  <h2>Lista de Productos</h2>
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <!-- Agrega más columnas según tus datos -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.id }}</td>
+        <td>{{ product.title }}</td>
+        <td>{{ product.price }}</td>
+        <!-- Agrega más columnas según tus datos -->
+      </tr>
+    </tbody>
+  </table>
+</div>
+<p *ngIf="!products">Cargando datos...</p>
+
+<button *ngIf="!consultaRealizada" (click)="consultarDatos()">Consultar</button>
+
+
+
+
+
+
+
