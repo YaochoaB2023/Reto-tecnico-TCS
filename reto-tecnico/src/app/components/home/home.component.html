@@ -9,6 +9,7 @@
         <th>Titulo</th>
         <th>Categoria</th>
         <th>Descripcion</th>
+        <th>Imagen</th>
         <th>Rate</th>
         <th>count</th>
         <th>Precio</th>
@@ -20,6 +21,9 @@
         <td>{{ product.title }}</td>
         <td>{{ product.category }}</td>
         <td>{{ product.description }}</td>
+        <td>
+          <button (click)="mostrarImagen(product.image)">Ver producto</button>
+        </td>
         <td>{{ product.rating.rate }}</td>
         <td>{{ product.rating.count }}</td>
         <td>{{ product.price }}</td>
