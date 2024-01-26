@@ -1,22 +1,28 @@
 
 
-<div *ngIf="products">
-  <h2>Lista de Productos</h2>
-  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+<h2 class="mt-2 ml-2">Lista de Productos</h2>
+<div class="mt-5 mb-5">
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped">
     <thead>
       <tr>
         <th>ID</th>
-        <th>Nombre</th>
+        <th>Titulo</th>
+        <th>Categoria</th>
+        <th>Descripcion</th>
+        <th>Rate</th>
+        <th>count</th>
         <th>Precio</th>
-        <!-- Agrega más columnas según tus datos -->
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let product of products">
         <td>{{ product.id }}</td>
         <td>{{ product.title }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.rating.rate }}</td>
+        <td>{{ product.rating.count }}</td>
         <td>{{ product.price }}</td>
-        <!-- Agrega más columnas según tus datos -->
       </tr>
     </tbody>
   </table>
